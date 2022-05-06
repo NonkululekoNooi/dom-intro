@@ -1,22 +1,72 @@
-// get a reference to the sms or call radio buttons
+//creating variables for the 
 
-// get refences to all the settings fields
+//updating settings button
+const button_updateSettings = document.querySelector(".button_updateSettings");
 
-//get a reference to the add button
+//adding call or sms button
+const button_primary = document.querySelector(".button_primary");
 
-//get a reference to the 'Update settings' button
+// variables for the update setting
+var total = 0;
+var sms = 0;
+var call = 0;
+var critical = 0;
+var warning = 0;
 
-// create a variables that will keep track of all the settings
+// variables for bill type
+var callTotal2 = 0;
+var smsTotal2 = 0;
 
-// create a variables that will keep track of all three totals.
 
-//add an event listener for when the 'Update settings' button is pressed
+function updateSettings() {
+    call = Number(document.getElementById("callCost").value)
+    sms = Number(document.getElementById("smsCost").value)
+    critical = Number(document.getElementById("critical").value)
+    warning = Number(document.getElementById("warning").value)
+    button_primary.disabled = false;
+}
 
-//add an event listener for when the add button is pressed
+function settingsBillTotal() {
 
-//in the event listener get the value from the billItemTypeRadio radio buttons
-// * add the appropriate value to the call / sms total
-// * add the appropriate value to the overall total
-// * add nothing for invalid values that is not 'call' or 'sms'.
-// * display the latest total on the screen.
-// * check the value thresholds and display the total value in the right color.
+    var checkedRadioBtn = document.querySelector("input[name='billItemTypeWithSettings']:checked");
+    if (checkedRadioBtn) {
+        var billItemType = checkedRadioBtn.value
+
+    }
+
+    if (billItemType === "call") {
+        callTotal2 += call;
+    }
+    else if (billItemType === "sms") {
+        smsTotal2 += sms;
+    }
+
+    document.getElementById("callTotalSettings").innerHTML = callTotal2.toFixed(2);
+    document.getElementById("smsTotalSettings").innerHTML = smsTotal2.toFixed(2);
+    var totalCost2 = callTotal2 + smsTotal2;
+
+    document.getElementById("totalSettings").innerHTML = totalCost2.toFixed(2);
+    document.querySelector(".colour2").classList.remove("danger");
+    document.querySelector(".colour2").classList.remove("warning");
+
+
+    if (totalCost2 >= warning) {
+
+        document.querySelector(".colour2").classList.add("warning");
+    }
+    if (totalCost2 >= critical) {
+        document.querySelector(".colour2").classList.remove("warning");
+        document.querySelector(".colour2").classList.add("danger");
+        button_primary.disabled = true
+    }
+
+
+
+}
+
+
+
+
+
+
+
