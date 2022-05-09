@@ -31,7 +31,7 @@ function calculateBtnClicked() {
     var billTotal = 0;
     //loop over all the bill items
     for (var i = 0; i < billItems.length; i++) {
-        var billItem = billItems[i].trim();
+        var billItem = billItems[i].trim().toLowerCase();
         if (billItem === "call") {
             billTotal += 2.75;
         }
@@ -42,10 +42,6 @@ function calculateBtnClicked() {
 
     //round to two decimals
     var roundedBillTotal = billTotal.toFixed(2);
-
-
-
-
     billTotalElement.innerHTML = roundedBillTotal;
     const currentTotal = Number(roundedBillTotal)
 
@@ -53,8 +49,6 @@ function calculateBtnClicked() {
     billTotalSpanElement.classList.remove("warning");
 
     if (currentTotal >= 30) {
-
-
         billTotalSpanElement.classList.add("danger");
     }
     else if (currentTotal >= 20 && currentTotal < 30) {
