@@ -24,6 +24,22 @@ function updateSettings() {
     critical = Number(document.getElementById("critical").value)
     warning = Number(document.getElementById("warning").value)
     button_primary.disabled = false;
+
+    document.querySelector(".colour2").classList.remove("danger");
+    document.querySelector(".colour2").classList.remove("warning");
+
+
+    if (total >= warning && total <= critical) {
+        document.querySelector(".colour2").classList.remove("danger");
+
+        document.querySelector(".colour2").classList.add("warning");
+    }
+    if (total >= critical) {
+        document.querySelector(".colour2").classList.remove("warning");
+        document.querySelector(".colour2").classList.add("danger");
+        button_primary.disabled = true
+    }
+
 }
 
 function settingsBillTotal() {
@@ -43,18 +59,18 @@ function settingsBillTotal() {
 
     document.getElementById("callTotalSettings").innerHTML = callTotal2.toFixed(2);
     document.getElementById("smsTotalSettings").innerHTML = smsTotal2.toFixed(2);
-    var totalCost2 = callTotal2 + smsTotal2;
+     total = callTotal2 + smsTotal2;
 
-    document.getElementById("totalSettings").innerHTML = totalCost2.toFixed(2);
+    document.getElementById("totalSettings").innerHTML = total.toFixed(2);
     document.querySelector(".colour2").classList.remove("danger");
     document.querySelector(".colour2").classList.remove("warning");
 
 
-    if (totalCost2 >= warning) {
+    if (total >= warning && total <= critical) {
 
         document.querySelector(".colour2").classList.add("warning");
     }
-    if (totalCost2 >= critical) {
+    if (total >= critical) {
         document.querySelector(".colour2").classList.remove("warning");
         document.querySelector(".colour2").classList.add("danger");
         button_primary.disabled = true
